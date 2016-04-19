@@ -89,5 +89,24 @@
 #begin Fonts/MenuFont.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
-/processorParam:TextureFormat=Compressed
+/processorParam:TextureFormat=NoChange
 /build:Fonts/MenuFont.spritefont
+
+#begin Fonts/halfMenuFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:TextureFormat=NoChange
+/build:Fonts/halfMenuFont.spritefont
+
+#begin Fonts/quarterMenuFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:TextureFormat=NoChange
+/build:Fonts/quarterMenuFont.spritefont
+
+#begin Fonts/eigthMenuFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:TextureFormat=NoChange
+/build:Fonts/eigthMenuFont.spritefont
+

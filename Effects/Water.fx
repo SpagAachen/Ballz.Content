@@ -1,8 +1,8 @@
 ﻿
 texture WaterTexture;
 
-const float4 waterColor = float4(0, 0.2, 1, 0.75);
-const float waterThreshold = 0.35;
+static const float4 waterColor = float4(0, 0.2, 1, 0.75);
+static const float waterThreshold = 0.35;
 
 sampler waterSampler = sampler_state
 {
@@ -47,7 +47,7 @@ technique Technique1
 {
    pass Pass1
    {
-      VertexShader = compile vs_4_0 VertexShaderFunction();
-      PixelShader = compile ps_4_0 PixelShaderFunction();
+      VertexShader = compile vs_3_0 VertexShaderFunction();
+      PixelShader = compile ps_3_0 PixelShaderFunction();
    }
 }

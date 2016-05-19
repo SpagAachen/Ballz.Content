@@ -3,7 +3,7 @@
 
 /outputDir:.
 /intermediateDir:obj
-/platform:WindowsGL
+/platform:DesktopGL
 /config:
 /profile:Reach
 /compress:False
@@ -21,6 +21,7 @@
 /processorParam:GenerateMipmaps=False
 /processorParam:PremultiplyAlpha=True
 /processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Worlds/TestWorld.png
 
@@ -109,4 +110,130 @@
 /processor:FontDescriptionProcessor
 /processorParam:TextureFormat=NoChange
 /build:Fonts/eigthMenuFont.spritefont
+
+#begin Sounds/abgeblubbert.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/abgeblubbert.wav
+
+#begin Sounds/accept.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/accept.wav
+
+#begin Sounds/badkitty.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/badkitty.wav
+
+#begin Sounds/decline.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/decline.wav
+
+#begin Sounds/drop01.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/drop01.wav
+
+#begin Sounds/drop02.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/drop02.wav
+
+#begin Sounds/drop03.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/drop03.wav
+
+#begin Sounds/freedom_fuckyeah.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/freedom_fuckyeah.wav
+
+#begin Sounds/germoney.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/germoney.wav
+
+#begin Sounds/gurgel.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/gurgel.wav
+
+#begin Sounds/hit01.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/hit01.wav
+
+#begin Sounds/hit02.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/hit02.wav
+
+#begin Sounds/hit03.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/hit03.wav
+
+#begin Sounds/hit04.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/hit04.wav
+
+#begin Sounds/oink.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/oink.wav
+
+#begin Sounds/peng01.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/peng01.wav
+
+#begin Sounds/peng02.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/peng02.wav
+
+#begin Sounds/peng03.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/peng03.wav
+
+#begin Sounds/peng04.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/peng04.wav
+
+#begin Sounds/peng05.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/peng05.wav
+
+#begin Sounds/rocket.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/rocket.wav
 

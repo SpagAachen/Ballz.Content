@@ -9,8 +9,8 @@ sampler terrainTypesSampler = sampler_state
 {
    Texture = (TerrainTypesTexture);
    MipFilter = POINT;
-   MinFilter = POINT;
-   MagFilter = POINT;
+   MinFilter = LINEAR;
+   MagFilter = LINEAR;
 };
 
 sampler earthSampler = sampler_state
@@ -75,7 +75,6 @@ float3 filterTerrainType(float2 texcoord, float2 texscale)
     float type0 = tex2D(terrainTypesSampler, float2(p.x, p.z)).r * 255.0;
     float3 typeWeights0 = saturate(1 - abs(float3(1, 2, 3) - type0));
 
-
     float type1 = tex2D(terrainTypesSampler, float2(p.y, p.z)).r * 255.0;
     float3 typeWeights1 = saturate(1 - abs(float3(1, 2, 3) - type1));
 
@@ -100,7 +99,14 @@ float4 PixelShaderFunction(VertexShaderOutput input) : COLOR0
 {
    float2 texSize = float2(500, 500);
    float2 typeCoords = float2(input.texCoordTerrain.y*0.5, input.texCoordTerrain.x);
-   float3 typeWeights = filterTerrainType(typeCoords*texSize,  1.0 / texSize);
+
+   float3 typeWeights = tex2D(terrainTypesSampler, typeCoords).rgb;
+
+   typeWeights += 0.01;
+
+   typeWeights = pow(typeWeights, 32);
+
+   typeWeights /= typeWeights.x + typeWeights.y + typeWeights.z;
 
    float4 color = float4(0, 0, 0, 1);
 

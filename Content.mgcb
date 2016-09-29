@@ -237,3 +237,9 @@
 /processorParam:Quality=Best
 /build:Sounds/rocket.wav
 
+#begin Effects/Terrain.fx
+/importer:EffectImporter
+/processor:EffectProcessor
+/processorParam:DebugMode=Auto
+/build:Effects/Terrain.fx
+

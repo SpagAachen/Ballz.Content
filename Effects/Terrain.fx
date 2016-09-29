@@ -60,46 +60,9 @@ VertexShaderOutput VertexShaderFunction(VertexShaderInput input)
    return output;
 }
 
-float3 filterTerrainType(float2 texcoord, float2 texscale)
-{
-    float fx = frac(texcoord.x);
-    float fy = frac(texcoord.y);
-    texcoord.x -= fx;
-    texcoord.y -= fy;
-
-    float4 p = float4(texcoord.x - 0.5, texcoord.x + 0.5, texcoord.y - 0.5, texcoord.y + 0.5);
-    p = p * float4(texscale.x, texscale.x, texscale.y, texscale.y);
-
-    float type = 0;
-
-    float type0 = tex2D(terrainTypesSampler, float2(p.x, p.z)).r * 255.0;
-    float3 typeWeights0 = saturate(1 - abs(float3(1, 2, 3) - type0));
-
-    float type1 = tex2D(terrainTypesSampler, float2(p.y, p.z)).r * 255.0;
-    float3 typeWeights1 = saturate(1 - abs(float3(1, 2, 3) - type1));
-
-    float type2 = tex2D(terrainTypesSampler, float2(p.x, p.w)).r * 255.0;
-    float3 typeWeights2 = saturate(1 - abs(float3(1, 2, 3) - type2));
-
-    float type3 = tex2D(terrainTypesSampler, float2(p.y, p.w)).r * 255.0;
-    float3 typeWeights3 = saturate(1 - abs(float3(1, 2, 3) - type3));
-
-    float3 typeWeights = lerp(
-        lerp(typeWeights0, typeWeights1, fx),
-        lerp(typeWeights2, typeWeights3, fx), fy);
-
-    typeWeights = pow(typeWeights, 32);
-
-    typeWeights = typeWeights / (typeWeights.x + typeWeights.y + typeWeights.z);
-
-    return typeWeights;
-}
-
 float4 PixelShaderFunction(VertexShaderOutput input) : COLOR0
 {
-   float2 texSize = float2(500, 500);
-   float2 typeCoords = float2(input.texCoordTerrain.y*0.5, input.texCoordTerrain.x);
-
+   float2 typeCoords = float2(input.texCoordTerrain.x, input.texCoordTerrain.y);
    float3 typeWeights = tex2D(terrainTypesSampler, typeCoords).rgb;
 
    typeWeights += 0.01;

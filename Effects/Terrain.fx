@@ -4,6 +4,7 @@ texture SandTexture;
 texture StoneTexture;
 float4x4 ModelViewProjection;
 float TextureScale;
+float2 TerrainSize;
 
 sampler terrainTypesSampler = sampler_state
 {
@@ -60,49 +61,32 @@ VertexShaderOutput VertexShaderFunction(VertexShaderInput input)
    return output;
 }
 
-float3 filterTerrainType(float2 texcoord, float2 texscale)
+float3 blur(float2 coords)
 {
-    float fx = frac(texcoord.x);
-    float fy = frac(texcoord.y);
-    texcoord.x -= fx;
-    texcoord.y -= fy;
-
-    float4 p = float4(texcoord.x - 0.5, texcoord.x + 0.5, texcoord.y - 0.5, texcoord.y + 0.5);
-    p = p * float4(texscale.x, texscale.x, texscale.y, texscale.y);
-
-    float type = 0;
-
-    float type0 = tex2D(terrainTypesSampler, float2(p.x, p.z)).r * 255.0;
-    float3 typeWeights0 = saturate(1 - abs(float3(1, 2, 3) - type0));
-
-    float type1 = tex2D(terrainTypesSampler, float2(p.y, p.z)).r * 255.0;
-    float3 typeWeights1 = saturate(1 - abs(float3(1, 2, 3) - type1));
-
-    float type2 = tex2D(terrainTypesSampler, float2(p.x, p.w)).r * 255.0;
-    float3 typeWeights2 = saturate(1 - abs(float3(1, 2, 3) - type2));
-
-    float type3 = tex2D(terrainTypesSampler, float2(p.y, p.w)).r * 255.0;
-    float3 typeWeights3 = saturate(1 - abs(float3(1, 2, 3) - type3));
-
-    float3 typeWeights = lerp(
-        lerp(typeWeights0, typeWeights1, fx),
-        lerp(typeWeights2, typeWeights3, fx), fy);
-
-    typeWeights = pow(typeWeights, 32);
-
-    typeWeights = typeWeights / (typeWeights.x + typeWeights.y + typeWeights.z);
-
-    return typeWeights;
+    float4 acc = float4(0,0,0,0);
+    for(int dx = -1; dx <= 1; dx++)
+    {
+        for(int dy = -1; dy <= 1; dy++)
+        {
+            float2 d = float2(dx, dy) / TerrainSize;
+            float4 c = tex2D(terrainTypesSampler, coords + d);
+            c /= (dx*dx+dy*dy)+1;
+            c.a = 1;
+            acc += c;
+        }
+    }
+    return acc.rgb / acc.a;
 }
 
 float4 PixelShaderFunction(VertexShaderOutput input) : COLOR0
 {
-   float2 texSize = float2(500, 500);
-   float2 typeCoords = float2(input.texCoordTerrain.y*0.5, input.texCoordTerrain.x);
-
-   float3 typeWeights = tex2D(terrainTypesSampler, typeCoords).rgb;
+   float3 typeWeights = tex2D(terrainTypesSampler, input.texCoordTerrain).rgb;//blur(input.texCoordTerrain);
 
    typeWeights += 0.01;
+
+   float edge = clamp(pow(1.35 - length(typeWeights), 3), 0, 0.8);
+   //edge = saturate(sign(edge - 0.78));
+
 
    typeWeights = pow(typeWeights, 32);
 
@@ -113,6 +97,8 @@ float4 PixelShaderFunction(VertexShaderOutput input) : COLOR0
    color += typeWeights.x * tex2D(earthSampler, input.texCoordPos);
    color += typeWeights.y * tex2D(sandSampler, input.texCoordPos);
    color += typeWeights.z * tex2D(stoneSampler, input.texCoordPos);
+
+   color.rgb = color.rgb * (1-edge);
 
    return color;
 }

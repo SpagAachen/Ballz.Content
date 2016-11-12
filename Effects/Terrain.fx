@@ -4,6 +4,7 @@ texture SandTexture;
 texture StoneTexture;
 float4x4 ModelViewProjection;
 float TextureScale;
+float2 TerrainSize;
 
 sampler terrainTypesSampler = sampler_state
 {
@@ -67,6 +68,10 @@ float4 PixelShaderFunction(VertexShaderOutput input) : COLOR0
 
    typeWeights += 0.01;
 
+   float edge = clamp(pow(1.35 - length(typeWeights), 3), 0, 0.8);
+   //edge = saturate(sign(edge - 0.78));
+
+
    typeWeights = pow(typeWeights, 32);
 
    typeWeights /= typeWeights.x + typeWeights.y + typeWeights.z;
@@ -76,6 +81,8 @@ float4 PixelShaderFunction(VertexShaderOutput input) : COLOR0
    color += typeWeights.x * tex2D(earthSampler, input.texCoordPos);
    color += typeWeights.y * tex2D(sandSampler, input.texCoordPos);
    color += typeWeights.z * tex2D(stoneSampler, input.texCoordPos);
+
+   color.rgb = color.rgb * (1-edge);
 
    return color;
 }

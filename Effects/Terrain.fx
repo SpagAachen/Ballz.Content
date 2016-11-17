@@ -61,26 +61,10 @@ VertexShaderOutput VertexShaderFunction(VertexShaderInput input)
    return output;
 }
 
-float3 blur(float2 coords)
-{
-    float4 acc = float4(0,0,0,0);
-    for(int dx = -1; dx <= 1; dx++)
-    {
-        for(int dy = -1; dy <= 1; dy++)
-        {
-            float2 d = float2(dx, dy) / TerrainSize;
-            float4 c = tex2D(terrainTypesSampler, coords + d);
-            c /= (dx*dx+dy*dy)+1;
-            c.a = 1;
-            acc += c;
-        }
-    }
-    return acc.rgb / acc.a;
-}
-
 float4 PixelShaderFunction(VertexShaderOutput input) : COLOR0
 {
-   float3 typeWeights = tex2D(terrainTypesSampler, input.texCoordTerrain).rgb;//blur(input.texCoordTerrain);
+   float2 typeCoords = float2(input.texCoordTerrain.x, input.texCoordTerrain.y);
+   float3 typeWeights = tex2D(terrainTypesSampler, typeCoords).rgb;
 
    typeWeights += 0.01;
 

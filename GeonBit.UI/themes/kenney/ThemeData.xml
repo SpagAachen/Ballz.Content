@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XnaContent xmlns:ns="Microsoft.Xna.Framework">
+  <Asset Type="GeonBit.UI.DataTypes.ThemeSettings">
+    <ThemeName>Kenney</ThemeName>
+    <AuthorName>Lukas Boersma</AuthorName>
+    <Description>A simple UI Theme based on sprites from Kenney's UI.</Description>
+    <Credits>
+Kennes UI:
+- http://kenney.nl/assets/ui-pack
+- http://kenney.nl/assets/ui-pack-rpg-expansion
+
+Remainders from old "HD" theme contains content from:
+- http://opengameart.org/content/golden-ui
+- http://opengameart.org/content/roguelikerpg-icons
+- http://opengameart.org/content/roguelikerpg-items
+- http://opengameart.org/content/arabian-icons
+- http://opengameart.org/content/2d-static-spritesicons
+- http://opengameart.org/content/30-ability-icons
+- http://opengameart.org/content/whispers-of-avalon-item-icons
+    </Credits>
+    <Version>1.0.0</Version>
+    <RepoUrl></RepoUrl>
+	<License>MIT</License>
+  </Asset>
+</XnaContent>
